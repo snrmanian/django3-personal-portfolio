@@ -1,28 +1,40 @@
-{% extends 'portfolio/base.html' %}
+{% extends "portfolio/base.html" %}
+
+{% load static %}
 
 {% block content %}
 
-{% load static %}
-<h1>Subbu's portfolio</h1><br>
-<a href={% url  'blog:all_blogs' %}> Blog </a> 
-<br>
+<div class="row justify-content-center my-3">
+  <div class="col-5">
+    <img src="{% static 'portfolio/django.jpg' %}" class="img-fluid">
+  </div>
+</div>
 
-<a href={% static 'portfolio/resume.pdf' %}> My resume  </a> 
-<br>
+<div class="row justify-content-center mb-3">
+  <div class="col-md-9 text-center">
+    <h3 id="hometext" class="font-weight-bold">Subbu Sethuraman is Commander-in-Chief  and lives in Downtown Bangalore</h3>
+  </div>
+</div>
 
-<img src="{% static 'portfolio/django.jpg' %}" >
-<br>
+<h2 class="mt-5">Portfolio</h2>
+<hr>
+<div class="row">
+  {% for record in records %}
+  <div class="col-lg-4 col-md-6">
 
-{% for record in records %}
+    {% if record.url %}
+    <a href="{{ record.url }}">
+      <img src="{{ record.image.url }}" class="img-fluid mb-2">
+    </a>
+    {% else %}
 
-<h1>{{ record.title }}</h1><br>
-<p>{{ record.description }}</p><br>
-<img src="{{ record.image.url }}" height=140 width=140>
+    <img src="{{ record.image.url }}" class="img-fluid mb-2">
+    {% endif %}
+    <h3>{{ record.title }}</h3>
+    <p>{{ record.description }}</p>
 
-{% if record.url %}
-<br><a href={{record.url}} > Link <a><br>
-{% endif %}
+  </div>
+  {% endfor %}
+</div>
 
-{% endfor %}
-
-{%endblock %}
+{% endblock %}
