@@ -1,0 +1,28 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+
+{% load static %}
+<h1>Subbu's portfolio</h1><br>
+<a href={% url  'blog:all_blogs' %}> Blog </a> 
+<br>
+
+<a href={% static 'portfolio/resume.pdf' %}> My resume  </a> 
+<br>
+
+<img src="{% static 'portfolio/django.jpg' %}" >
+<br>
+
+{% for record in records %}
+
+<h1>{{ record.title }}</h1><br>
+<p>{{ record.description }}</p><br>
+<img src="{{ record.image.url }}" height=140 width=140>
+
+{% if record.url %}
+<br><a href={{record.url}} > Link <a><br>
+{% endif %}
+
+{% endfor %}
+
+{%endblock %}
