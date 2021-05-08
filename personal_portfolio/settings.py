@@ -136,3 +136,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+try:
+    from personal_portfolio.local_settings import *
+except ImportError:
+    print("Looks like you are in production as there is no local settings file here")
